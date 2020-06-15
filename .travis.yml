@@ -1,0 +1,36 @@
+sudo: false
+
+language: php
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.local
+
+env:
+  global:
+    - COMPOSER_ARGS="--no-interaction --prefer-source"
+    - CS_CHECK=true
+
+matrix:
+  include:
+    - php: 7.4
+      env:
+        - TEST_COVERAGE=true
+    - php: nightly
+
+before_install:
+  - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
+  - composer self-update
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer require --dev --no-update satooshi/php-coveralls ; fi
+
+install:
+  - travis_retry composer install $COMPOSER_ARGS
+  - composer info
+
+script:
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; else composer test ; fi
+  - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
+
+after_script:
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer upload-coverage ; fi
