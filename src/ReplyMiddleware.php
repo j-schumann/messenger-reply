@@ -18,6 +18,7 @@ class ReplyMiddleware implements MiddlewareInterface
 {
     const MSG_RECEIVED_MESSAGE = '{middleware} received message {class}';
     const MSG_NO_HANDLED_STAMP = 'Message {class} has a replyTo stamp but was not handled before being passed to the ReplyMiddleware, wrong middleware order?';
+
     use LoggerAwareTrait;
 
     /**
