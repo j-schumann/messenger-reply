@@ -40,4 +40,4 @@ script:
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 
 after_success:
-  - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry php vendor/bin/php-coveralls -v --coverage_clover clover.xml ; fi
+  - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry php vendor/bin/php-coveralls -v --coverage_clover clover.xml --json_path coveralls-upload.json ; fi
