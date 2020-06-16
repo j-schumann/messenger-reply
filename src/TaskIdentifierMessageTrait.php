@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Vrok\MessengerReply;
 
 /**
- * Implements TaskIdentifierMessageInterface
+ * Implements TaskIdentifierMessageInterface.
  */
 trait TaskIdentifierMessageTrait
 {
