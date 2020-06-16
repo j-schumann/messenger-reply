@@ -70,7 +70,7 @@ class PdfResultMessage
 Add a transport for the shared AMQP broker, routing to the _input_ of the
 receiver (having the same exchange and queue name as the receivers _input_ queue).
 
-```yml
+```yaml
 framework:
     messenger:
         transports:
@@ -136,7 +136,18 @@ framework:
 
 ### Replying side
 
-Configure the middleware on your message bus:  
+Configure the middleware service:
+
+```yaml
+services:
+    Vrok\MessengerReply\ReplyMiddleware:
+        tags:
+            - { name: monolog.logger, channel: messenger }
+        calls:
+            - [setLogger, ['@logger']]
+```
+
+Enable the middleware on your message bus:  
 (We have to disable the default middleware and explicitly define the order as
 there is no priority option, just adding our service to the middleware-option
 would add it before send_middleware. See https://github.com/symfony/symfony/issues/28568)
@@ -154,7 +165,7 @@ framework:
                     - failed_message_processing_middleware
                     - send_message
                     - handle_message
-                    - App\Messenger\ReplyMiddleware
+                    - Vrok\MessengerReply\ReplyMiddleware
 ```
 
 Configure an _input_ transport where you send messages from the external
