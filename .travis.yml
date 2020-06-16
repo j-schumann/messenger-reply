@@ -1,9 +1,9 @@
 sudo: false
 
-#addons:
-#  apt:
-#    packages:
-#      - librabbitmq-dev
+addons:
+  apt:
+    packages:
+      - librabbitmq-dev
 
 language: php
 
