@@ -18,7 +18,7 @@ middleware + stamp on the receiving side):
 You need request and reply message classes that are equal on both sides, e.g.
 use a shared composer package:
 
-```
+```php
 namespace MyNamespace\Message;
 
 class GeneratePdfMessage
@@ -70,7 +70,7 @@ class PdfResultMessage
 Add a transport for the shared AMQP broker, routing to the _input_ of the
 receiver (having the same exchange and queue name as the receivers _input_ queue).
 
-```
+```yml
 framework:
     messenger:
         transports:
@@ -100,7 +100,7 @@ the exchange and queue name of the receivers _output_ queue):
 We need separate transports as `messenger:consume [transportname]` consumes
 all messages in all queues for that transport.
 
-```
+```yaml
 framework:
     messenger:
         transports:
@@ -126,7 +126,7 @@ framework:
 
 Route your requests to the shared transport/queue:
 
-```
+```yaml
 framework:
     messenger:
         routing:
@@ -141,7 +141,7 @@ Configure the middleware on your message bus:
 there is no priority option, just adding our service to the middleware-option
 would add it before send_middleware. See https://github.com/symfony/symfony/issues/28568)
 
-```
+```yaml
 framework:
     messenger:
         buses:
@@ -165,7 +165,7 @@ replies meant for them.
 We need separate transports as `messenger:consume [transportname]` consumes
 all messages in all queues for that transport.
 
-```
+```yaml
 framework:
     messenger:
         transports:
@@ -212,7 +212,7 @@ framework:
 
 All replies should be routed to the output transport:
 
-```
+```yaml
 framework:
     messenger:
         routing:
@@ -225,7 +225,7 @@ framework:
 Dispatch the request message with the attached ReplyStamp so the
 receiver knows where to send the replies:
 
-```
+```php
     use MyNamespace\GeneratePdfMessage;
     use Vrok\MessengerReply\ReplyToStamp;
 
@@ -238,7 +238,7 @@ receiver knows where to send the replies:
 Implement a MessageHandler that handles the requests and returns the reply
 Message object:
 
-```
+```php
 use MyNamespace\GeneratePdfMessage
 use MyNamespace\PdfResultMessage
 
