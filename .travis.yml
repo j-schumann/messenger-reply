@@ -1,9 +1,9 @@
 sudo: false
 
-addons:
-  apt:
-    packages:
-      - librabbitmq-dev
+#addons:
+#  apt:
+#    packages:
+#      - librabbitmq-dev
 
 language: php
 
@@ -25,7 +25,7 @@ matrix:
     - php: nightly
 
 before_install:
-  - pecl install amqp
+  - yes '' | pecl install amqp
   - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
   - composer self-update
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer require --dev --no-update satooshi/php-coveralls ; fi
