@@ -31,7 +31,6 @@
         "cs-check": "php-cs-fixer fix --dry-run --diff -v",
         "cs-fix": "php-cs-fixer fix -v",
         "test": "phpunit --colors=always",
-        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
-        "upload-coverage": "coveralls -v"
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     }
 }
