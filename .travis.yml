@@ -22,7 +22,8 @@ matrix:
     - php: 7.4
       env:
         - TEST_COVERAGE=true
-    - php: nightly
+# 2020-06-16: pecl install amqp fails on nightly
+#    - php: nightly
 
 before_install:
   - yes '' | pecl install amqp
@@ -39,4 +40,4 @@ script:
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 
 after_success:
-  - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry php vendor/bin/php-coveralls -v ; fi
+  - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry php vendor/bin/php-coveralls -v --coverage_clover clover.xml ; fi
