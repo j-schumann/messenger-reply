@@ -1,10 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Vrok\MessengerReply\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Vrok\MessengerReply\ReplyToStamp;
 
 class TaskIdentifierMessageTest extends TestCase
 {

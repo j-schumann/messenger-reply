@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Vrok\MessengerReply\Tests;
@@ -15,6 +16,7 @@ class TestBus implements MessageBusInterface
         $this->envelope = $message instanceof Envelope
             ? $message
             : new Envelope($message);
+
         return $this->envelope;
     }
 }

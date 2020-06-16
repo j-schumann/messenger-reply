@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Vrok\MessengerReply;
@@ -9,24 +10,19 @@ class ReplyToStamp implements StampInterface
 {
     /**
      * Where to send the reply?
-     *
-     * @var string
      */
     private string $routingKey;
 
     /**
      * ReplyToStamp constructor.
      *
-     * @param string $routingKey    AMQP routing key, where to send the reply (queue name)
+     * @param string $routingKey AMQP routing key, where to send the reply (queue name)
      */
     public function __construct(string $routingKey)
     {
         $this->routingKey = $routingKey;
     }
 
-    /**
-     * @return string
-     */
     public function getRoutingKey(): string
     {
         return $this->routingKey;

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Vrok\MessengerReply\Tests;
@@ -139,9 +140,8 @@ class ReplyMiddlewareTest extends TestCase
         $replyTo = new ReplyToStamp('output');
 
         $res = $mw->handle($envelope
-                ->with($replyTo)
-                ->with(new HandledStamp(new TestReply(), 'TestHandler'))
-            , $stack);
+            ->with($replyTo)
+            ->with(new HandledStamp(new TestReply(), 'TestHandler')), $stack);
 
         // the dispatch() method was called
         $this->assertNotNull($bus->envelope);

@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 namespace Vrok\MessengerReply;
 
@@ -21,14 +21,11 @@ class ReplyMiddleware implements MiddlewareInterface
 
     use LoggerAwareTrait;
 
-    /**
-     * @var MessageBusInterface
-     */
     private MessageBusInterface $bus;
 
     public function __construct(MessageBusInterface $bus)
     {
-        $this->bus = $bus;
+        $this->bus    = $bus;
         $this->logger = new NullLogger();
     }
 
@@ -39,7 +36,7 @@ class ReplyMiddleware implements MiddlewareInterface
     {
         $context = [
             'message' => $envelope->getMessage(),
-            'class' => \get_class($envelope->getMessage()),
+            'class'   => \get_class($envelope->getMessage()),
         ];
 
         $this->logger->debug(
@@ -62,14 +59,13 @@ class ReplyMiddleware implements MiddlewareInterface
                 self::MSG_NO_HANDLED_STAMP,
                 $context
             );
+
             return $stack->next()->handle($envelope, $stack);
         }
 
         $result = $handledStamp->getResult();
         if (!is_object($result)) {
-            throw new UnrecoverableMessageHandlingException(
-                "Result returned by handler {$handledStamp->getHandlerName()} "
-                ."must be a serializable Message object to be a valid reply!");
+            throw new UnrecoverableMessageHandlingException("Result returned by handler {$handledStamp->getHandlerName()} must be a serializable Message object to be a valid reply!");
         }
 
         // copy the identifying properties to the reply so the original sender

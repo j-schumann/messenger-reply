@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Vrok\MessengerReply\Tests;
@@ -15,6 +16,7 @@ class TestMiddleware implements MiddlewareInterface
     public function handle(Envelope $envelope, StackInterface $stack): Envelope
     {
         $this->called = true;
+
         return $envelope->with(new TransportMessageIdStamp('999'));
     }
 }
