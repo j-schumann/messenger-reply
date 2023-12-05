@@ -6,7 +6,7 @@ talking to each other over the same broker: e.g. a web frontend and a
 microservice, where the frontend sends tasks to the service and requests a
 reply, for example a generated PDF file.
 
-[![Build Status](https://travis-ci.org/j-schumann/messenger-reply.svg?branch=master)](https://travis-ci.org/j-schumann/messenger-reply)
+[![CI Status](https://github.com/j-schumann/messenger-reply/actions/workflows/ci.yaml/badge.svg)](https://github.com/j-schumann/messenger-reply/actions)
 [![Coverage Status](https://coveralls.io/repos/github/j-schumann/messenger-reply/badge.svg?branch=master)](https://coveralls.io/github/j-schumann/messenger-reply?branch=master)
 
 ## Setup
