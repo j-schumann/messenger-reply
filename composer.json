@@ -10,6 +10,7 @@
         "symfony/amqp-messenger": "^7.0.0"
     },
     "require-dev": {
+        "asmblah/php-amqp-compat": "*",
         "friendsofphp/php-cs-fixer": "^3.89.1",
         "phpunit/phpunit": "^12.4.2",
         "rector/rector": "^2.2.7"
