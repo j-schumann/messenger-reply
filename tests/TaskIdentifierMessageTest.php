@@ -6,15 +6,15 @@ namespace Vrok\MessengerReply\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-class TaskIdentifierMessageTest extends TestCase
+final class TaskIdentifierMessageTest extends TestCase
 {
-    public function testTraitProperties()
+    public function testTraitProperties(): void
     {
         $msg = new TestMessage();
         $msg->setIdentifier('123');
         $msg->setTask('research');
 
-        $this->assertEquals('123', $msg->getIdentifier());
-        $this->assertEquals('research', $msg->getTask());
+        self::assertEquals('123', $msg->getIdentifier());
+        self::assertSame('research', $msg->getTask());
     }
 }

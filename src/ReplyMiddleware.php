@@ -16,32 +16,26 @@ use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class ReplyMiddleware implements MiddlewareInterface
 {
-    const MSG_RECEIVED_MESSAGE = '{middleware} received message {class}';
-    const MSG_NO_HANDLED_STAMP = 'Message {class} has a replyTo stamp but was not handled before being passed to the ReplyMiddleware, wrong middleware order?';
-
     use LoggerAwareTrait;
 
-    private MessageBusInterface $bus;
+    public const MSG_RECEIVED_MESSAGE = '{middleware} received message {class}';
+    public const MSG_NO_HANDLED_STAMP = 'Message {class} has a replyTo stamp but was not handled before being passed to the ReplyMiddleware, wrong middleware order?';
 
-    public function __construct(MessageBusInterface $bus)
+    public function __construct(private MessageBusInterface $bus)
     {
-        $this->bus    = $bus;
         $this->logger = new NullLogger();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function handle(Envelope $envelope, StackInterface $stack): Envelope
     {
         $context = [
             'message' => $envelope->getMessage(),
-            'class'   => \get_class($envelope->getMessage()),
+            'class'   => $envelope->getMessage()::class,
         ];
 
         $this->logger->debug(
             self::MSG_RECEIVED_MESSAGE,
-            $context + ['middleware' => __CLASS__]
+            $context + ['middleware' => self::class]
         );
 
         /** @var ReplyToStamp $replyToStamp */
@@ -64,7 +58,7 @@ class ReplyMiddleware implements MiddlewareInterface
         }
 
         $result = $handledStamp->getResult();
-        if (!is_object($result)) {
+        if (!\is_object($result)) {
             throw new UnrecoverableMessageHandlingException("Result returned by handler {$handledStamp->getHandlerName()} must be a serializable Message object to be a valid reply!");
         }
 
@@ -77,15 +71,15 @@ class ReplyMiddleware implements MiddlewareInterface
             $result->setTask($context['message']->getTask());
         }
 
-        // Reply with the handlers result, route to the "replyTo address".
-        // It's the handlers responsibility to return a serializable message.
+        // Reply with the handler's result, route to the "replyTo address".
+        // It's the handler's responsibility to return a serializable message.
         $reply = (new Envelope($result))
             ->with(new AmqpStamp($replyToStamp->getRoutingKey()));
 
         $this->logger->info(
             'Replying to handled message {class}: routing {reply} to key {routingKey}',
             $context + [
-                'reply'      => \get_class($result),
+                'reply'      => $result::class,
                 'routingKey' => $replyToStamp->getRoutingKey(),
             ]
         );

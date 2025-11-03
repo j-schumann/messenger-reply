@@ -6,7 +6,7 @@ namespace Vrok\MessengerReply;
 
 /**
  * When replying to messages with this interface with a message also implementing
- * this interface the identifiers are automatically transfered.
+ * this interface the identifiers are automatically transferred.
  */
 interface TaskIdentifierMessageInterface
 {

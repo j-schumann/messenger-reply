@@ -7,12 +7,12 @@ namespace Vrok\MessengerReply\Tests;
 use PHPUnit\Framework\TestCase;
 use Vrok\MessengerReply\ReplyToStamp;
 
-class ReplyToStampTest extends TestCase
+final class ReplyToStampTest extends TestCase
 {
-    public function testProperties()
+    public function testProperties(): void
     {
         $stamp = new ReplyToStamp('output');
 
-        $this->assertEquals('output', $stamp->getRoutingKey());
+        self::assertSame('output', $stamp->getRoutingKey());
     }
 }
