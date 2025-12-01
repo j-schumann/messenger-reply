@@ -7,7 +7,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
-        "symfony/amqp-messenger": "^7.0.0"
+        "symfony/amqp-messenger": "^8.0.0"
     },
     "require-dev": {
         "asmblah/php-amqp-compat": "*",
