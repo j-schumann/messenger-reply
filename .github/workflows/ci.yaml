@@ -19,15 +19,16 @@ jobs:
           - '8.3'
           - '8.4'
           - '8.5'
+          - '8.5'
         dependencies: [lowest, highest]
         include:
-          - php: '8.4'
+          - php: '8.5'
             dependencies: highest
             coverage: true
       fail-fast: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
