@@ -6,14 +6,14 @@
     "homepage": "https://vrok.de",
     "license": "MIT",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "symfony/amqp-messenger": "^7.2.0|^8.0.0"
     },
     "require-dev": {
         "asmblah/php-amqp-compat": "*",
-        "friendsofphp/php-cs-fixer": "^3.91.2",
-        "phpunit/phpunit": "^12.4.5",
-        "rector/rector": "^2.2.11"
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "phpunit/phpunit": "^13.2",
+        "rector/rector": "^2.5"
     },
     "autoload": {
         "psr-4": {
