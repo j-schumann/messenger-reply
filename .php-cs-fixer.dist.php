@@ -22,11 +22,6 @@ return $config
             ],
         ],
 
-        // @Symfony:risky removes the declaration, this package uses strict types
-        'declare_strict_types' => [
-            'strategy' => 'enforce',
-        ],
-
         'method_argument_space' => [
             'on_multiline' =>  'ensure_fully_multiline',
         ],

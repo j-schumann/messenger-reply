@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Vrok\MessengerReply;
 
 use Symfony\Component\Messenger\Stamp\StampInterface;
