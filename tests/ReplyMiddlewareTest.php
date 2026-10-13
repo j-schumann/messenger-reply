@@ -20,15 +20,6 @@ use Vrok\MessengerReply\ReplyToStamp;
 
 final class ReplyMiddlewareTest extends TestCase
 {
-    public function testConstruction(): void
-    {
-        $bus = $this->createStub(MessageBusInterface::class);
-        $logger = $this->createStub(LoggerInterface::class);
-
-        $mw = new ReplyMiddleware($bus);
-        $mw->setLogger($logger);
-    }
-
     public function testIgnoresMessageWithoutReplyTo(): void
     {
         $bus = $this->createMock(MessageBusInterface::class);
@@ -100,7 +91,7 @@ final class ReplyMiddlewareTest extends TestCase
     public function testRequiresResultObject(): void
     {
         $bus = $this->createMock(MessageBusInterface::class);
-        $logger = $this->createMock(LoggerInterface::class);
+        $logger = $this->createStub(LoggerInterface::class);
 
         // it will not dispatch a new message but throw an error
         $bus->expects($this->never())
@@ -124,7 +115,7 @@ final class ReplyMiddlewareTest extends TestCase
         // Class "Symfony\Component\Messenger\Envelope" is declared "final" and cannot be mocked.
         $bus = new TestBus();
 
-        $logger = $this->createMock(LoggerInterface::class);
+        $logger = $this->createStub(LoggerInterface::class);
 
         $mw = new ReplyMiddleware($bus);
         $mw->setLogger($logger);
